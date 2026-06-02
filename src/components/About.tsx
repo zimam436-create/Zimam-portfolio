@@ -1,9 +1,20 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Scan, ShieldAlert, Cpu } from "lucide-react";
+import { useState, useEffect } from "react";
+
+const photos = ["/profile.png", "/profile2.jpg", "/profile3.jpg"];
 
 export default function About() {
+  const [photoIndex, setPhotoIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPhotoIndex((prev) => (prev + 1) % photos.length);
+    }, 4000); // Change photo every 4 seconds
+    return () => clearInterval(interval);
+  }, []);
   return (
     <section className="py-32 relative overflow-hidden" id="about">
       {/* Background Decor */}
@@ -34,15 +45,35 @@ export default function About() {
               
               {/* Image placeholder - a glowing abstract core or portrait */}
               <div className="absolute inset-0 bg-black flex items-center justify-center">
-                {/* Profile Photo with Holo-glitch effect */}
+                {/* Profile Photo with Holo-glitch effect and Rotation */}
                 <div className="relative w-4/5 h-4/5 rounded-lg border border-neon-blue/40 flex items-center justify-center overflow-hidden">
-                   <div className="absolute inset-0 bg-neon-blue/20 mix-blend-overlay z-10" />
-                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                   <img 
-                     src="/profile.png" 
-                     alt="Umar Zimam" 
-                     className="w-full h-full object-cover filter contrast-125 brightness-90 grayscale-[0.3]"
-                   />
+                   <div className="absolute inset-0 bg-neon-blue/20 mix-blend-overlay z-10 pointer-events-none" />
+                   <AnimatePresence mode="popLayout">
+                     <motion.img 
+                       key={photoIndex}
+                       src={photos[photoIndex]}
+                       alt="Umar Zimam" 
+                       className="absolute w-full h-full object-cover filter contrast-125 brightness-90 grayscale-[0.3]"
+                       initial={{ opacity: 0, scale: 1.1, x: -10, filter: "hue-rotate(90deg) blur(5px)" }}
+                       animate={{ 
+                         opacity: 1, 
+                         scale: 1, 
+                         x: [0, -5, 5, -2, 2, 0],
+                         filter: [
+                           "hue-rotate(0deg) blur(0px)",
+                           "hue-rotate(90deg) blur(2px)",
+                           "hue-rotate(-90deg) blur(2px)",
+                           "hue-rotate(0deg) blur(0px)"
+                         ]
+                       }}
+                       exit={{ opacity: 0, scale: 0.9, x: 10, filter: "hue-rotate(-90deg) blur(5px)" }}
+                       transition={{ 
+                         duration: 0.5,
+                         x: { duration: 0.3, ease: "linear" },
+                         filter: { duration: 0.3, ease: "linear" }
+                       }}
+                     />
+                   </AnimatePresence>
                 </div>
                 
                 <div className="absolute top-4 left-4 text-xs font-mono text-neon-blue">ID: UZ-2080</div>

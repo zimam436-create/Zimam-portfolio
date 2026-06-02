@@ -3,11 +3,32 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
+interface NeonLine {
+  id: number;
+  x: number;
+  height: number;
+  delay: number;
+  duration: number;
+  color: string;
+  opacity: number;
+  width: number;
+}
+
+const NEON_COLORS = [
+  "#00f3ff", // neon-blue
+  "#bc13fe", // neon-violet
+  "#ff003c", // neon-crimson
+  "#00f3ff",
+  "#00f3ff", // Weight toward blue
+  "#bc13fe",
+];
+
 export default function CosmicBackground() {
   const [stars, setStars] = useState<{ id: number; x: number; y: number; size: number; duration: number }[]>([]);
+  const [neonLines, setNeonLines] = useState<NeonLine[]>([]);
 
   useEffect(() => {
-    // Generate static stars for the cosmic feel
+    // Generate static stars
     const generatedStars = Array.from({ length: 80 }).map((_, i) => ({
       id: i,
       x: Math.random() * 100,
@@ -16,6 +37,19 @@ export default function CosmicBackground() {
       duration: Math.random() * 3 + 2,
     }));
     setStars(generatedStars);
+
+    // Generate neon rain lines
+    const generatedLines: NeonLine[] = Array.from({ length: 40 }).map((_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      height: Math.random() * 120 + 30,
+      delay: Math.random() * 8,
+      duration: Math.random() * 4 + 3,
+      color: NEON_COLORS[Math.floor(Math.random() * NEON_COLORS.length)],
+      opacity: Math.random() * 0.3 + 0.1,
+      width: Math.random() * 1.5 + 0.5,
+    }));
+    setNeonLines(generatedLines);
   }, []);
 
   return (
@@ -46,6 +80,30 @@ export default function CosmicBackground() {
         />
       ))}
 
+      {/* Neon Rain Lines - thin neon lights falling in space */}
+      {neonLines.map((line) => (
+        <motion.div
+          key={`neon-${line.id}`}
+          className="absolute rounded-full"
+          style={{
+            left: `${line.x}%`,
+            width: line.width,
+            height: line.height,
+            background: `linear-gradient(to bottom, transparent, ${line.color}, transparent)`,
+            boxShadow: `0 0 6px ${line.color}, 0 0 12px ${line.color}`,
+            opacity: line.opacity,
+          }}
+          initial={{ top: "-10%" }}
+          animate={{ top: "110%" }}
+          transition={{
+            duration: line.duration,
+            repeat: Infinity,
+            ease: "linear",
+            delay: line.delay,
+          }}
+        />
+      ))}
+
       {/* Global Glitch Effect Overlay */}
       <motion.div
         className="absolute inset-0 mix-blend-overlay opacity-30"
@@ -61,7 +119,7 @@ export default function CosmicBackground() {
           repeat: Infinity,
           repeatType: "mirror",
           ease: "linear",
-          repeatDelay: 5, // Glitches every 5 seconds
+          repeatDelay: 5,
         }}
       />
       
