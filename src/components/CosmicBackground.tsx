@@ -29,7 +29,7 @@ export default function CosmicBackground() {
 
   useEffect(() => {
     // Generate static stars
-    const generatedStars = Array.from({ length: 80 }).map((_, i) => ({
+    const generatedStars = Array.from({ length: 60 }).map((_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
@@ -38,8 +38,8 @@ export default function CosmicBackground() {
     }));
     setStars(generatedStars);
 
-    // Generate neon rain lines
-    const generatedLines: NeonLine[] = Array.from({ length: 40 }).map((_, i) => ({
+    // Generate neon rain lines (reduced count for performance)
+    const generatedLines: NeonLine[] = Array.from({ length: 25 }).map((_, i) => ({
       id: i,
       x: Math.random() * 100,
       height: Math.random() * 120 + 30,
@@ -57,9 +57,9 @@ export default function CosmicBackground() {
       {/* Deep cosmic gradient */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-neon-blue/10 via-black to-black opacity-60" />
       
-      {/* Starfield */}
+      {/* Starfield with pure CSS animation for performance */}
       {stars.map((star) => (
-        <motion.div
+        <div
           key={star.id}
           className="absolute rounded-full bg-white"
           style={{
@@ -67,51 +67,37 @@ export default function CosmicBackground() {
             top: `${star.y}%`,
             width: star.size,
             height: star.size,
-          }}
-          animate={{
-            opacity: [0.1, 0.8, 0.1],
-            scale: [1, 1.5, 1],
-          }}
-          transition={{
-            duration: star.duration,
-            repeat: Infinity,
-            ease: "easeInOut",
+            animation: `star-twinkle ${star.duration}s infinite ease-in-out`,
           }}
         />
       ))}
 
-      {/* Neon Rain Lines - thin neon lights falling in space */}
+      {/* Neon Rain Lines with pure CSS animation for performance */}
       {neonLines.map((line) => (
-        <motion.div
+        <div
           key={`neon-${line.id}`}
           className="absolute rounded-full"
           style={{
             left: `${line.x}%`,
+            top: "-10%",
             width: line.width,
             height: line.height,
             background: `linear-gradient(to bottom, transparent, ${line.color}, transparent)`,
             boxShadow: `0 0 6px ${line.color}, 0 0 12px ${line.color}`,
             opacity: line.opacity,
-          }}
-          initial={{ top: "-10%" }}
-          animate={{ top: "110%" }}
-          transition={{
-            duration: line.duration,
-            repeat: Infinity,
-            ease: "linear",
-            delay: line.delay,
+            animation: `neon-fall ${line.duration}s infinite linear ${line.delay}s`,
           }}
         />
       ))}
 
       {/* Global Glitch Effect Overlay */}
       <motion.div
-        className="absolute inset-0 mix-blend-overlay opacity-30"
+        className="absolute inset-0 mix-blend-overlay opacity-20"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
         }}
         animate={{
-          x: ["0%", "-2%", "1%", "0%"],
+          x: ["0%", "-1%", "1%", "0%"],
           y: ["0%", "1%", "-1%", "0%"],
         }}
         transition={{
@@ -119,7 +105,7 @@ export default function CosmicBackground() {
           repeat: Infinity,
           repeatType: "mirror",
           ease: "linear",
-          repeatDelay: 5,
+          repeatDelay: 8,
         }}
       />
       

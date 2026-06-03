@@ -56,7 +56,7 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section className="py-32 relative bg-black" id="projects">
+    <section className="py-32 relative bg-transparent" id="projects">
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, x: -20 }}

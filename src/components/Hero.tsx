@@ -42,20 +42,85 @@ export default function Hero() {
             Neural Link Established
           </div>
           
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold mb-4 tracking-tighter text-glow">
-            UMAR ZIMAM
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold mb-4 tracking-tighter text-glow flex justify-center space-x-2">
+            {"UMAR ZIMAM".split(" ").map((word, wIdx) => (
+              <span key={wIdx} className="flex">
+                {word.split("").map((char, cIdx) => (
+                  <motion.span
+                    key={`${wIdx}-${cIdx}`}
+                    initial={{ opacity: 0, x: -5, filter: "blur(4px)" }}
+                    animate={{ 
+                      opacity: [0, 1, 0.2, 1, 0.5, 1], 
+                      x: [-5, 2, -2, 3, -1, 0],
+                      filter: ["blur(4px)", "blur(0px)", "blur(2px)", "blur(0px)"],
+                      color: ["#ffffff", "#00f3ff", "#bc13fe", "#ff003c", "#ffffff"]
+                    }}
+                    transition={{ 
+                      duration: 0.5, 
+                      delay: 0.5 + (wIdx * 5 + cIdx) * 0.12,
+                      ease: "linear"
+                    }}
+                    className="inline-block"
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+              </span>
+            ))}
           </h1>
           
-          <div className="h-12 md:h-16 flex items-center justify-center">
-            <motion.p
+          <div className="h-24 md:h-32 flex items-center justify-center" style={{ perspective: 1000 }}>
+            <motion.div
               key={titleIndex}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="text-xl md:text-3xl text-neon-violet font-mono tracking-wide"
+              initial={{ opacity: 0, rotateX: 90, rotateY: 15, scale: 0.8, filter: "blur(10px) hue-rotate(90deg)" }}
+              animate={{ 
+                opacity: 1, 
+                rotateX: 0, 
+                rotateY: 0,
+                scale: 1,
+                filter: ["blur(10px) hue-rotate(90deg)", "blur(0px) hue-rotate(0deg)", "blur(2px) contrast(150%)", "blur(0px)"]
+              }}
+              exit={{ opacity: 0, rotateX: -90, rotateY: -15, scale: 0.8, filter: "blur(10px) hue-rotate(-90deg)" }}
+              transition={{ duration: 0.6, type: "spring", bounce: 0.3 }}
+              className="relative px-8 md:px-12 py-4 bg-neon-crimson/5 border border-neon-crimson/50 rounded shadow-[0_0_20px_rgba(255,0,60,0.3),inset_0_0_15px_rgba(255,0,60,0.1)] backdrop-blur-md overflow-hidden group"
+              style={{ transformStyle: "preserve-3d" }}
             >
-              {titles[titleIndex]}
-            </motion.p>
+              {/* Scanline overlay */}
+              <div className="absolute inset-0 bg-[repeating-linear-gradient(transparent,transparent_2px,rgba(255,0,60,0.1)_3px,rgba(255,0,60,0.1)_3px)] group-hover:animate-[scanline_2s_infinite] pointer-events-none opacity-60" />
+              
+              <motion.h2 
+                className="text-xl md:text-3xl font-mono tracking-widest font-bold text-transparent bg-clip-text bg-gradient-to-r from-neon-crimson via-white to-neon-violet uppercase text-center relative"
+                style={{ filter: "drop-shadow(0 0 10px rgba(255,0,60,0.8))", transform: "translateZ(30px)" }}
+                animate={{ x: [-2, 2, -1, 1, 0], y: [1, -1, 1, -1, 0] }}
+                transition={{ duration: 0.2, repeat: 2, delay: 0.15 }}
+              >
+                {titles[titleIndex]}
+                
+                {/* Chromatic aberration layers */}
+                <motion.span 
+                  className="absolute inset-0 text-neon-blue opacity-70 mix-blend-screen pointer-events-none"
+                  animate={{ x: [-5, 5, -3, 0], opacity: [0, 0.9, 0.3, 0] }}
+                  transition={{ duration: 0.25, repeat: 2, delay: 0.1 }}
+                  style={{ zIndex: -1, textShadow: "none" }}
+                >
+                  {titles[titleIndex]}
+                </motion.span>
+                <motion.span 
+                  className="absolute inset-0 text-neon-violet opacity-70 mix-blend-screen pointer-events-none"
+                  animate={{ x: [5, -5, 3, 0], opacity: [0, 0.9, 0.3, 0] }}
+                  transition={{ duration: 0.25, repeat: 2, delay: 0.1 }}
+                  style={{ zIndex: -2, textShadow: "none" }}
+                >
+                  {titles[titleIndex]}
+                </motion.span>
+              </motion.h2>
+
+              {/* Cyberpunk corner accents */}
+              <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-neon-crimson shadow-[0_0_8px_#ff003c]" />
+              <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-neon-crimson shadow-[0_0_8px_#ff003c]" />
+              <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-neon-crimson shadow-[0_0_8px_#ff003c]" />
+              <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-neon-crimson shadow-[0_0_8px_#ff003c]" />
+            </motion.div>
           </div>
           
           <p className="mt-6 text-gray-400 max-w-2xl mx-auto text-lg md:text-xl font-light">

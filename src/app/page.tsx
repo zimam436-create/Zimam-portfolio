@@ -14,7 +14,7 @@ export default function Home() {
   const [booted, setBooted] = useState(false);
 
   return (
-    <main className="bg-black min-h-screen">
+    <main className="bg-transparent min-h-screen z-10 relative">
       {!booted ? (
         <BootSequence onComplete={() => setBooted(true)} />
       ) : (

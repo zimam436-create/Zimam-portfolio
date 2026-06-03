@@ -15,13 +15,34 @@ const links = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-20% 0px -60% 0px" } // Triggers when element is in the top 20-40% of the screen
+    );
+
+    links.forEach((link) => {
+      const el = document.getElementById(link.href.replace("#", ""));
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   return (
@@ -45,10 +66,20 @@ export default function Navbar() {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-gray-400 hover:text-neon-blue transition-colors relative group"
+                className={`transition-colors relative group ${
+                  activeSection === link.href.replace("#", "")
+                    ? "text-neon-blue text-glow"
+                    : "text-gray-400 hover:text-neon-blue"
+                }`}
               >
                 {link.name}
-                <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-neon-blue transition-all group-hover:w-full shadow-[0_0_8px_#00f3ff]" />
+                <span
+                  className={`absolute -bottom-2 left-0 h-0.5 bg-neon-blue transition-all shadow-[0_0_8px_#00f3ff] ${
+                    activeSection === link.href.replace("#", "")
+                      ? "w-full"
+                      : "w-0 group-hover:w-full"
+                  }`}
+                />
               </a>
             ))}
           </div>
@@ -76,7 +107,11 @@ export default function Navbar() {
               key={link.name}
               href={link.href}
               onClick={() => setIsOpen(false)}
-              className="text-gray-300 hover:text-neon-blue text-glow transition-colors"
+              className={`transition-colors ${
+                activeSection === link.href.replace("#", "")
+                  ? "text-neon-blue text-glow font-bold"
+                  : "text-gray-300 hover:text-neon-blue hover:text-glow"
+              }`}
             >
               {link.name}
             </a>

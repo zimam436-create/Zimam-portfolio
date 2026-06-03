@@ -67,7 +67,7 @@ function CodeIcon() {
 
 export default function Skills() {
   return (
-    <section className="py-32 relative bg-black" id="skills">
+    <section className="py-32 relative bg-transparent" id="skills">
       {/* Background Matrix/Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(0,243,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,243,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
       
