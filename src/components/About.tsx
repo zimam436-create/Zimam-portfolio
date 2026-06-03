@@ -100,14 +100,21 @@ export default function About() {
             </div>
 
             <p className="text-xl md:text-2xl text-gray-300 leading-relaxed">
-              A rare, self-taught <span className="text-neon-blue font-bold">genius</span> obsessed with dismantling the boundaries between human intuition and machine intelligence. 
+              A systems-driven technologist operating at the intersection of <span className="text-neon-blue font-bold">artificial intelligence</span>, cybernetic infrastructure, and autonomous computing.
             </p>
             <p className="text-gray-400 leading-relaxed text-lg">
-              Currently engineering the architecture of tomorrow through B.Tech in Computer Science, Umar is a visionary builder researching <span className="text-neon-violet">AI</span>, <span className="text-neon-blue">cyber defense</span>, and advanced automation systems. He doesn't just write code; he constructs digital ecosystems capable of redefining global infrastructure.
+              Driven by an obsession with reverse-engineering complexity, Umar Zimam is relentlessly exploring how machine intelligence, distributed systems, and advanced automation can reshape the architecture of civilization itself. Currently pursuing B.Tech in Computer Science Engineering, he is focused not merely on software development, but on designing scalable digital ecosystems engineered for the post-AI era . systems built to accelerate human advancement and elevate civilization beyond the limitations of conventional human cognition.
             </p>
             <p className="text-gray-400 leading-relaxed text-lg">
-              His mission: to forge secure, intelligent, and autonomous technologies that feel like they belong in 2080.
+              His research interests span artificial intelligence, neural computation, cybersecurity, cloud-scale infrastructure, human-machine interaction, and autonomous decision systems. Rather than viewing code as a programming language alone, he treats it as a medium for constructing adaptive, intelligent frameworks capable of evolving beyond conventional technological limitations.
             </p>
+            <p className="text-gray-400 leading-relaxed text-lg">
+              With a mindset rooted in systems thinking and future-oriented engineering, zimam is deeply interested in building resilient architectures that merge security, intelligence, and automation into a unified technological force. His long-term vision revolves around creating sovereign AI systems, self-optimizing infrastructures, and next-generation computational environments that feel decades ahead of their time.
+            </p>
+            <blockquote className="mt-6 pl-6 border-l-4 border-neon-blue italic text-2xl md:text-3xl font-heading tracking-wide leading-relaxed text-neon-blue">
+              "I believe, the future is not something to predict — it is something we build ."
+              <footer className="mt-3 text-sm text-neon-blue/70 font-mono not-italic">— Umar Zimam</footer>
+            </blockquote>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 pt-8 border-t border-white/10">
               <div className="flex flex-col gap-1">

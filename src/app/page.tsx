@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import BootSequence from "@/components/BootSequence";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -15,10 +16,12 @@ export default function Home() {
 
   return (
     <main className="bg-transparent min-h-screen z-10 relative">
-      {!booted ? (
-        <BootSequence onComplete={() => setBooted(true)} />
-      ) : (
-        <>
+      <AnimatePresence>
+        {!booted && <BootSequence key="boot" onComplete={() => setBooted(true)} />}
+      </AnimatePresence>
+      
+      {booted && (
+        <motion.div key="app" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}>
           <Navbar />
           <Hero />
           <About />
@@ -26,7 +29,7 @@ export default function Home() {
           <Projects />
           <Experience />
           <Contact />
-        </>
+        </motion.div>
       )}
     </main>
   );

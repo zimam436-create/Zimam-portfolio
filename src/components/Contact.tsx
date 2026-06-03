@@ -211,14 +211,18 @@ export default function Contact() {
                 <span className="text-green-400"><WhatsappIcon size={24} /></span>
                 <span>WhatsApp — +91 7380718077</span>
               </a>
-              <div className="flex items-center gap-4 text-gray-300 p-4 border border-transparent bg-white/5 rounded">
+              <a href="tel:+917380718077" className="flex items-center gap-4 text-gray-300 hover:text-neon-blue transition-all p-4 border border-transparent hover:border-neon-blue/30 bg-white/5 rounded cyber-button">
                 <Phone className="text-neon-blue" />
                 <span>+91 7380718077</span>
-              </div>
-              <div className="flex items-center gap-4 text-gray-300 p-4 border border-transparent bg-white/5 rounded">
+              </a>
+              <a href="https://www.google.com/maps/dir/?api=1&destination=Sultanpur,+Uttar+Pradesh,+India" target="_blank" rel="noreferrer" className="flex items-center gap-4 text-gray-300 hover:text-neon-blue transition-all p-4 border border-transparent hover:border-neon-blue/30 bg-white/5 rounded cyber-button">
                 <MapPin className="text-neon-blue" />
                 <span>Sultanpur, Uttar Pradesh, India</span>
-              </div>
+              </a>
+              <a href="https://whatsapp.com/channel/0029VbDHi7iKGGGOxv131r1k" target="_blank" rel="noreferrer" className="flex items-center gap-4 text-gray-300 hover:text-green-400 transition-all p-4 border border-transparent hover:border-green-400/30 bg-white/5 rounded cyber-button">
+                <span className="text-green-400"><WhatsappIcon size={24} /></span>
+                <span>WhatsApp Channel — X-celerate with Zimam</span>
+              </a>
             </div>
 
             <h3 className="text-2xl font-heading text-neon-violet mt-6 mb-4">DIGITAL FOOTPRINT</h3>

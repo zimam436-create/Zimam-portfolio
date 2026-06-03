@@ -48,16 +48,19 @@ export default function Navbar() {
   return (
     <>
       <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5, delay: 0.5 }}
-        className={`fixed top-0 w-full z-40 transition-all duration-300 ${
+        className={`fixed top-0 w-full z-40 transition-colors duration-300 ${
           scrolled ? "bg-black/80 backdrop-blur-md border-b border-neon-blue/20 shadow-[0_0_20px_rgba(0,243,255,0.1)]" : "bg-transparent"
         }`}
       >
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="font-heading text-xl font-bold text-glow cursor-pointer">
-            UZ_SYS
+          <div className="cursor-pointer flex items-center justify-center">
+            <motion.img 
+              layoutId="site-logo" 
+              src="/logo.png" 
+              alt="Umar Zimam Logo" 
+              className="w-12 h-12 rounded-full shadow-[0_0_15px_rgba(0,243,255,0.3)] hover:shadow-[0_0_25px_rgba(0,243,255,0.6)] transition-shadow duration-300"
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+            />
           </div>
 
           {/* Desktop Menu */}
